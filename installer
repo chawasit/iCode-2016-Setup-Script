@@ -46,7 +46,9 @@ echo "[+] install pc^2"
 cd ~/Desktop
 wget -O pc2.tar.gz http://pc2.ecs.csus.edu/code/v9/pc2-9.3.1-3320/pc2-9.3.1-3320.tar.gz
 tar -zxf pc2.tar.gz
-cd pc2*
+rm pc2.tar.gz
+mv pc2* pc2
+cd pc2
 mv bin bin_old
 mkdir bin
 mv bin_old/pc2env bin

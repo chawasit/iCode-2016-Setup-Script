@@ -6,7 +6,8 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 read -p "[?] Enter team name: " TEAM_NAME
-echo $TEAM_NAME
+read -p "[?] Enter server address and port: " SERVER_ADDR
+echo "team name = $TEAM_NAME, server = $SERVER_ADDR"
 
 echo "[+] set hostname: $TEAM_NAME"
 echo "$TEAM_NAME" > /etc/hostname
@@ -45,3 +46,14 @@ echo "[+] install pc^2"
 cd ~/Desktop
 wget -O pc2.tar.gz http://pc2.ecs.csus.edu/code/v9/pc2-9.3.1-3320/pc2-9.3.1-3320.tar.gz
 tar -zxf pc2.tar.gz
+cd pc2*
+mv bin bin_old
+mkdir bin
+mv bin_old/pc2env bin
+mv bin_old/pc2team bin
+rm -rf bin_old
+sed -i.bak "s/server=localhost:50002/server=$SERVER_ADDR/g" pc2v9.ini
+mv pc2v9.ini ./bin/pc2v9.ini
+ln -S ~/pc2*/bin/pc2team ~/Desktop/pc2
+
+echo "[+] Complete please reboot"

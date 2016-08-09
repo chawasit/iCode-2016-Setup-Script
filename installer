@@ -16,28 +16,28 @@ echo "[+] append hosts"
 echo "127.0.0.1 $TEAM_NAME" >> /etc/hosts
 
 echo "[+] install compiler"
-apt-get install g++ gcc
+apt-get install g++ gcc -y
 
 echo "[+] add java repository"
 add-apt-repository ppa:openjdk-r/ppa
 apt-get update
 
 echo "[+] install java"
-apt-get install openjdk-8-jdk
+apt-get install openjdk-8-jdk -y
 
 echo "[+] install vim"
-apt-get install vim-gnome
+apt-get install vim-gnome -y
 
 echo "[+] install emac"
-apt-get install emacs24
+apt-get install emacs24 -y
 
 echo "[+] install geany"
-apt-get install geany
+apt-get install geany -y
 
 echo "[+] install eclipse"
-apt-get install eclipse eclipse-cdt
+apt-get install eclipse eclipse-cdt -y
 update-java-alternatives -s java-1.8.0-openjdk-amd64
-apt-get remove openjdk-7-jdk
+apt-get remove openjdk-7-jdk -y
 
 echo "[+] system upgrade"
 apt-get upgrade -y

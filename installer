@@ -1,0 +1,47 @@
+#!/bin/bash
+
+if [[ $EUID -ne 0 ]]; then
+    echo "this script Need sudoer!!!"
+    exit 1
+fi
+
+read -p "[?] Enter team name: " TEAM_NAME
+echo $TEAM_NAME
+
+echo "[+] set hostname: $TEAM_NAME"
+echo "$TEAM_NAME" > /etc/hostname
+
+echo "[+] append hosts"
+echo "127.0.0.1 $TEAM_NAME" >> /etc/hosts
+
+echo "[+] install compiler"
+apt-get install g++ gcc
+
+echo "[+] add java repository"
+add-apt-repository ppa:openjdk-r/ppa
+apt-get update
+
+echo "[+] install java"
+apt-get install openjdk-8-jdk
+
+echo "[+] install vim"
+apt-get install vim-gnome
+
+echo "[+] install emac"
+apt-get install emacs24
+
+echo "[+] install geany"
+apt-get install geany
+
+echo "[+] install eclipse"
+apt-get install eclipse eclipse-cdt
+update-java-alternatives -s java-1.8.0-openjdk-amd64
+apt-get remove openjdk-7-jdk
+
+echo "[+] system upgrade"
+apt-get upgrade -y
+
+echo "[+] install pc^2"
+cd ~/Desktop
+wget -O pc2.tar.gz http://pc2.ecs.csus.edu/code/v9/pc2-9.3.1-3320/pc2-9.3.1-3320.tar.gz
+tar -zxf pc2.tar.gz

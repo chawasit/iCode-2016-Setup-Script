@@ -4,22 +4,15 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-read -p "[?] Enter team name: " TEAM_NAME
 read -p "[?] Enter server address: " SERVER_ADDR
 echo "team name = $TEAM_NAME, server = $SERVER_ADDR"
-
-echo "[+] set hostname: $TEAM_NAME"
-echo "$TEAM_NAME" > /etc/hostname
-
-echo "[+] append hosts"
-echo "127.0.0.1 $TEAM_NAME" >> /etc/hosts
-
-echo "[+] install compiler"
-apt-get install g++ gcc -y
 
 echo "[+] add java repository"
 add-apt-repository ppa:openjdk-r/ppa
 apt-get update
+
+echo "[+] install compiler"
+apt-get install g++ gcc -y
 
 echo "[+] install java"
 apt-get install openjdk-8-jdk -y

@@ -1,5 +1,4 @@
 #!/bin/bash
-
 if [[ $EUID -ne 0 ]]; then
     echo "this script Need sudoer!!!"
     exit 1
@@ -36,14 +35,16 @@ apt-get install geany -y
 
 echo "[+] install eclipse"
 apt-get install eclipse eclipse-cdt -y
+apt-get install icedtea-7-plugin -y
 update-java-alternatives -s java-1.8.0-openjdk-amd64
+update-java-alternatives -s java-1.8.0-openjdk-i386
 apt-get remove openjdk-7-jdk -y
 
 echo "[+] system upgrade"
 apt-get upgrade -y
 
 echo "[+] install pc^2"
-cd ~/Desktop
+cd ~/Downloads
 wget -O pc2.tar.gz http://pc2.ecs.csus.edu/code/v9/pc2-9.3.1-3320/pc2-9.3.1-3320.tar.gz
 tar -zxf pc2.tar.gz
 rm pc2.tar.gz
@@ -56,6 +57,5 @@ mv bin_old/pc2team bin
 rm -rf bin_old
 sed -i.bak "s/server=localhost:50002/server=$SERVER_ADDR:5002/g" pc2v9.ini
 mv pc2v9.ini ./bin/pc2v9.ini
-ln -S ~/pc2*/bin/pc2team ~/Desktop/pc2
 
 echo "[+] Complete please reboot"

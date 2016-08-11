@@ -33,9 +33,6 @@ update-java-alternatives -s java-1.8.0-openjdk-amd64
 update-java-alternatives -s java-1.8.0-openjdk-i386
 apt-get remove openjdk-7-jdk -y
 
-echo "[+] system upgrade"
-apt-get upgrade -y
-
 echo "[+] install pc^2"
 cd ~/Downloads
 wget -O pc2.tar.gz http://pc2.ecs.csus.edu/code/v9/pc2-9.3.1-3320/pc2-9.3.1-3320.tar.gz
@@ -45,6 +42,8 @@ mv pc2* pc2
 cd pc2
 mv bin bin_old
 mkdir bin
+mkdir bin/logs
+chmod 777 bin/logs
 mv bin_old/pc2env bin
 mv bin_old/pc2team bin
 rm -rf bin_old
